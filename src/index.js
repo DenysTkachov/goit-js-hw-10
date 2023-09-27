@@ -5,7 +5,7 @@ import refs from './js/refs';
 import { createMarcup } from './js/marcup';
 
 
-import { createMarcup } from './js/marcup';
+
 
 
 
@@ -30,7 +30,7 @@ fetchBreeds()
         });
         new SlimSelect({
             select: breedSelector,
-            data: dataProvider
+            data: dataProvider,
         });
     })
     .catch(onFetchError);

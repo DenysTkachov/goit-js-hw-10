@@ -6,11 +6,7 @@ import { createMarcup } from './js/marcup';
 
 
 
-
-
-
-
-
+console.log(refs);
 
 const { breedSelector, loader, error, catInfo } = refs;
 
@@ -28,10 +24,12 @@ fetchBreeds()
             text: '-- select a breed --',
             disabled: true,
         });
+        
         new SlimSelect({
             select: breedSelector,
             data: dataProvider,
         });
+        
     })
     .catch(onFetchError);
 
@@ -46,3 +44,6 @@ function onFetchError(errorInstance) {
         }
         );
 }
+
+
+

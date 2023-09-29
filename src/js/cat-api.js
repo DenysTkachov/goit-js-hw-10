@@ -1,27 +1,23 @@
-import axios from 'axios';
-axios.defaults.headers.common[
-  'x-api-key'
-] = `live_gemlNDVGJLAl0mz7HH50hfC9TVvG9ZcMn2NIH4ZNebsWKsZAcTmzySLkJh5Z0a6P`;
+const api_key =
+  'live_gemlNDVGJLAl0mz7HH50hfC9TVvG9ZcMn2NIH4ZNebsWKsZAcTmzySLkJh5Z0a6P';
+const base_url = 'https://api.thecatapi.com/v1/';
 
 export function fetchBreeds() {
-    return axios
-      .get(`https://api.thecatapi.com/v1/breeds`)
-      .then(response => {
-        return response.data;
-      })
-      .catch(error => {
-        return new Error('Oops! Something went wrong! Try reloading the page!');
-      });    
+  return fetch(`${base_url}breeds?api_key=${api_key}`).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
 }
 
-
 export function fetchCatByBreed(breedId) {
-    return axios
-      .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
-      .then(response => {
-        return response.data[0];
-      })
-      .catch(error => {
-        return new Error('Oops! Something went wrong! Try reloading the page!');
-      });
+  return fetch(
+    `${base_url}images/search?breed_ids=${breedId}&api_key=${api_key}`
+  ).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
 }

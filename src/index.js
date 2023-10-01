@@ -4,6 +4,7 @@ axios.defaults.headers.common['x-api-key'] =
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 
 const breedSelect = document.querySelector('.breed-select');
+
 const infoLoader = document.querySelector('.loader');
 const selectError = document.querySelector('.error');
 const catInfo = document.querySelector('.cat-info');
@@ -40,8 +41,10 @@ function init() {
 
     fetchCatByBreed(selectBreedId)
       .then(result => {
-        const catData = result;
-        const breedData = breedsData.find(breed => breed.id === selectBreedId);
+        const catData = result[0];
+        const breedData = breedsData.find(
+          breed => breed.id === catData.breeds[0].id
+        );
 
         const markup = createMarkup(catData, breedData);
         catInfo.innerHTML = markup;
@@ -50,7 +53,7 @@ function init() {
         catInfo.classList.remove('is-hidden');
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
         selectError.classList.remove('is-hidden');
         infoLoader.classList.add('is-hidden');
       });
